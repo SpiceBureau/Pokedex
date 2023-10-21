@@ -5,7 +5,7 @@ import '../../css/style.css'
 
 const NUMOF_GEN_123_POKEMON = 386;
 
-const PokemonList = ({ currentPage, onPokemonCardClick }) => {
+const PokemonList = ({ currentPage }) => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -51,7 +51,6 @@ const PokemonList = ({ currentPage, onPokemonCardClick }) => {
           id={pokemon.id}
           name={"#" + pokemon.id + " " + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} 
           sprite={pokemon.sprite}
-          onPokemonCardClick={onPokemonCardClick}
           />
       ))}
     </div>
