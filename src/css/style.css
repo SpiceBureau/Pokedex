@@ -58,3 +58,9 @@ input[type="number"] {
   text-align: center;
   width: 40px;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust column sizing as needed */
+  justify-items: center; /* Center horizontally */
+}

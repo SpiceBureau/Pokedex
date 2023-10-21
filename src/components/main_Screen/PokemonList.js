@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PokemonCard from './PokemonCard'; 
-import '../css/pokemon_list.css'
+import '../../css/style.css'
 
 const NUMOF_GEN_123_POKEMON = 386;
 
-const PokemonList = ({ currentPage }) => {
+const PokemonList = ({ currentPage, onPokemonCardClick }) => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -46,7 +46,13 @@ const PokemonList = ({ currentPage }) => {
   return (
     <div className="container">
       {pokemonList.map((pokemon, index) => (
-        <PokemonCard key={index} name={"#" + pokemon.id + " " + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} sprite={pokemon.sprite} />
+        <PokemonCard 
+          key={pokemon.id}
+          id={pokemon.id}
+          name={"#" + pokemon.id + " " + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} 
+          sprite={pokemon.sprite}
+          onPokemonCardClick={onPokemonCardClick}
+          />
       ))}
     </div>
   );
