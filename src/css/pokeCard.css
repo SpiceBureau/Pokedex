@@ -1,0 +1,28 @@
+.card {
+    width: 120px; /* Set the width of the card */
+    margin: 10px; /* Add margin to separate the cards in the list */
+    padding: 10px;
+    border: 1px solid #ddd; /* Add a border with a light gray color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  
+    /* Center the text and image */
+    text-align: center;
+    /* Ensure the card doesn't expand to fit its content */
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .card img {
+    width: 100%; /* Make the image fill the card horizontally */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px 8px 0 0; /* Rounded corners only at the top */
+  }
+  
+  .card p {
+    margin: 10px 0; /* Add space above and below the name */
+    font-size: 18px; /* Adjust the font size for the name */
+    color: #333; /* Text color */
+    font-size: 16px;
+  }
+  

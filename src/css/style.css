@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Soft gray background for the body */
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  background-color: #4e4e4e; /* Darker gray for the header */
+  color: #fff; /* White text color for the header */
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.main {
+  background-color: #e0e0e0; /* Softer gray for the main content */
+  padding: 20px;
+}
