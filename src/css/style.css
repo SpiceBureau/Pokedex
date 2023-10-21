@@ -32,7 +32,8 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px; /* Adjust the margin as needed */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .page-navigation {
@@ -44,3 +45,16 @@ h1 {
   margin: 0 10px;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.centered-input {
+  text-align: center;
+  width: 40px;
+}
