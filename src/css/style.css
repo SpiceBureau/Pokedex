@@ -1,21 +1,47 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #D3D3D3; /* Soft gray background for the body */
+  background-color: #D3D3D3; 
   font-family: Arial, sans-serif;
 }
 
 .header {
-  background-color: #575757; /* Darker gray for the header */
-  color: #fff; /* White text color for the header */
-  padding: 20px;
   text-align: center;
+  color: #FFF;
+  background-color: #0D47A1;
+  font-size: 36px;
+  padding: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header::before {
+  content: '';
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-image: url('../../public/favicon.ico');
+  background-size: cover;
+  margin-right: 10px;
+}
+
+.bottom-header {
+  text-align: center;
+  background-color: #0D47A1; 
+  color: #FFF;
+  font-size: 18px;
+  padding: 15px;
+  border-top: 1px solid #0D47A1; 
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 div {
   margin: 0;
   padding: 0;
-  background-color: #D3D3D3; /* Soft gray background for the body */
+  background-color: #D3D3D3; 
   font-family: Arial, sans-serif;
 }
 
@@ -24,7 +50,7 @@ h1 {
 }
 
 .main {
-  background-color: #e0e0e0; /* Softer gray for the main content */
+  background-color: #e0e0e0; 
   padding: 20px;
 }
 
@@ -62,7 +88,7 @@ input[type="number"] {
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-  justify-items: center; /* Center horizontally */
+  justify-items: center; 
 }
 
 .centered {
@@ -91,6 +117,35 @@ input[type="number"] {
 
 .cell {
   display: table-cell;
-  width: 50%;
   padding: 5px;
+  width: auto;
+}
+
+.label.gen {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.select.gen {
+  padding-right: 20px;
+  max-width: 70px;
+}
+
+.label.type {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.select.type {
+  padding-right: 20px;
+  max-width: 70px;
+}
+
+.label.sprites {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.input.sprites {
+  max-width: 70px;
 }
