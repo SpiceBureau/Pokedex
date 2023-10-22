@@ -2,7 +2,6 @@ import '../../css/style.css'
 import PokemonList from './PokemonList'
 import React, { useState, useEffect } from 'react';
 import PageNavigation from './PageNavigation';
-import { Outlet, Link } from "react-router-dom";
 
 const NUMOF_GEN_123_POKEMON = 386;
 

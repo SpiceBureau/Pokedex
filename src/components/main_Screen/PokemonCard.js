@@ -3,11 +3,11 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
-function PokemonCard({ name, sprite, id }) {
+function PokemonCard({ name, sprite, id, cleanName }) {
   const navigate = useNavigate();
 
   const handleLinkClick = () => { 
-    navigate(`/infoScreen/${id}`);
+    navigate(`/infoScreen/${cleanName}`);
   }
   return (
     <Link onClick={handleLinkClick}>

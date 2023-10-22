@@ -49,6 +49,7 @@ const PokemonList = ({ currentPage }) => {
         <PokemonCard 
           key={pokemon.id}
           id={pokemon.id}
+          cleanName={pokemon.name}
           name={"#" + pokemon.id + " " + pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} 
           sprite={pokemon.sprite}
           />
