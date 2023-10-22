@@ -2,6 +2,7 @@ import '../../css/style.css'
 import PokemonList from './PokemonList'
 import React, { useState, useEffect } from 'react';
 import PageNavigation from './PageNavigation';
+import FilterRow from './FilterRow';
 
 const NUMOF_GEN_123_POKEMON = 386;
 
@@ -17,9 +18,14 @@ const MainScreen = () => {
     <div>
       <h1 className='header'>Gen I, II, and III Pokemon</h1>
       <div>
-        <PokemonList currentPage={currentPage}/>
+        <FilterRow onPokemonPerPageChange={handlePokemonPerPageChange}/>
       </div>
-      <div><PageNavigation currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} /></div>
+      <div>
+        <PokemonList currentPage={currentPage} pokemonPerPage={pokemonPerPage} setPokemonPerPage={setPokemonPerPage}/>
+      </div>
+      <div>
+        <PageNavigation currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      </div>
     </div>
   );
 };

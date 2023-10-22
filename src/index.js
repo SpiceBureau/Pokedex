@@ -1,5 +1,4 @@
 import './css/index.css';
-import App from './components/App';
 import ErrorPage from './components/ErrorPage';
 import InfoScreen from './components/info_Screen/InfoScreen';
 import * as React from "react";
@@ -8,12 +7,13 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import MainScreen from './components/main_Screen/MainScreen';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <MainScreen />,
     errorElement: <ErrorPage />
   },
   {
