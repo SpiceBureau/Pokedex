@@ -40,7 +40,7 @@ const PokemonList = ({ currentPage }) => {
   }, [currentPage]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='loading-text'>Loading...</div>;
   }
 
   return (

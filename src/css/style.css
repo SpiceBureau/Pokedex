@@ -61,6 +61,21 @@ input[type="number"] {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust column sizing as needed */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
   justify-items: center; /* Center horizontally */
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 20px;
 }

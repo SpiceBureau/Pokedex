@@ -10,7 +10,6 @@ const MainScreen = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(Math.floor((NUMOF_GEN_123_POKEMON / 50) + 1));
   
-
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
