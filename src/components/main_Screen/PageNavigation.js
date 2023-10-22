@@ -3,7 +3,9 @@ import React from 'react';
 const PageNavigation = ({ currentPage, totalPages, onPageChange }) => {
   const handlePageChange = (e) => {
     const newPageValue = parseInt(e.target.value);
-    onPageChange(newPageValue);
+    if (totalPages >= e.newPageValue) { 
+      onPageChange(newPageValue); 
+    }
   };
   const goToPreviousPage = () => {
     if (currentPage > 1) {

@@ -5,7 +5,7 @@ import '../../css/style.css'
 
 const NUMOF_GEN_123_POKEMON = 1010;
 
-const PokemonList = ({ currentPage, currentGen, onTotalPagesChange }) => {
+const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange }) => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,34 +24,48 @@ const PokemonList = ({ currentPage, currentGen, onTotalPagesChange }) => {
           const requestLink = `https://pokeapi.co/api/v2/generation/${currentGen}`;
           const response = await axios.get(requestLink);
           const data = response.data.pokemon_species;
-          handleTotalPagesChange(Math.floor((data.length / 50) + 1))
+          data.sort((a, b) => {
+            const idA = parseInt(a.url.split('/').slice(-2, -1)[0], 10);
+            const idB = parseInt(b.url.split('/').slice(-2, -1)[0], 10);
+            return idA - idB;
+          });
           const limitedData = data.slice((currentPage - 1) * 50, limit + (currentPage - 1) * 50);
-          limitedData.sort((a, b) => a.url.split('/').slice(-2, -1)[0] - b.url.split('/').slice(-2, -1)[0]);
-          const promises = limitedData.map(async (pokemon) => {
+          const promises = limitedData
+          .map(async (pokemon) => {
             const id = pokemon.url.split('/').slice(-2, -1)[0];
-            const spriteResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${parseInt(id)}/`);
-            return {
+            const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${parseInt(id)}/`);
+            const types = pokemonResponse.data.types;
+            const correctType = types.some(pokeType => pokeType.type.name === currentType);
+
+            return (currentType === "All" || correctType) ? 
+            {
               name: pokemon.name,
-              sprite: spriteResponse.data.sprites.front_default,
+              sprite: pokemonResponse.data.sprites.front_default,
               id: id
-            };
+            } : null;
           });
           const pokemonData = await Promise.all(promises);
           setPokemonList(pokemonData);
           setLoading(false);
+          handleTotalPagesChange(Math.floor((data.length / 50) + 1))
         }
         else {
           const requestLink = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${(currentPage - 1) * 50}`;
           const response = await axios.get(requestLink);
           const data = response.data.results;
-          const promises = data.map(async (pokemon) => {
-            const spriteResponse = await axios.get(pokemon.url);
+          const promises = data
+          .map(async (pokemon) => {
+            const pokemonResponse = await axios.get(pokemon.url);
             const id = pokemon.url.split('/').slice(-2, -1)[0];
-            return {
+            const types = pokemonResponse.data.types;
+            const correctType = types.some(pokeType => pokeType.type.name === currentType);
+
+            return (currentType === "All" || correctType) ? 
+            {
               name: pokemon.name,
-              sprite: spriteResponse.data.sprites.front_default,
+              sprite: pokemonResponse.data.sprites.front_default,
               id: id
-            };
+            } : null;
           });
           const pokemonData = await Promise.all(promises);
           setPokemonList(pokemonData);
@@ -61,9 +75,8 @@ const PokemonList = ({ currentPage, currentGen, onTotalPagesChange }) => {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchPokemon();
-  }, [currentPage, currentGen]);
+  }, [currentPage, currentGen, currentType]);
 
   if (loading) {
     return <div className='loading-text'>Loading...</div>;
@@ -71,7 +84,9 @@ const PokemonList = ({ currentPage, currentGen, onTotalPagesChange }) => {
 
   return (
     <div className="container">
-      {pokemonList.map((pokemon, index) => (
+      {pokemonList
+      .filter((pokemon) => pokemon !== null)
+      .map((pokemon, index) => (
         <PokemonCard 
           key={pokemon.id}
           id={pokemon.id}

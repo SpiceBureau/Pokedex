@@ -10,25 +10,29 @@ const MainScreen = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(Math.floor((NUMOF_GEN_123_POKEMON / 50) + 1));
   const [currentGen, setCurrentGen] = useState("All")
+  const [currentType, setCurrentType] = useState("All")
   
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+  const handleTotalPagesChange = (newTotalPages) => {
+    setTotalPages(newTotalPages);
+  };
   const handleGenChange = (newGen) => {
     setCurrentGen(newGen);
   };
-  const handleTotalPagesChange = (newTotalPages) => {
-    setTotalPages(newTotalPages);
+  const handleTypeChange = (newType) => {
+    setCurrentType(newType);
   };
 
   return (
     <div>
-      <h1 className='header'>Gen I, II, and III Pokemon</h1>
+      <h1 className='header'>Gen I, II, III, and IV Pokemon</h1>
       <div>
-        <FilterRow onGenChange={handleGenChange}/>
+        <FilterRow onGenChange={handleGenChange} onTypeChange={handleTypeChange}/>
       </div>
       <div>
-        <PokemonList currentPage={currentPage} currentGen={currentGen} onTotalPagesChange={handleTotalPagesChange}/>
+        <PokemonList currentPage={currentPage} currentGen={currentGen} currentType={currentType} onTotalPagesChange={handleTotalPagesChange}/>
       </div>
       <div>
         <PageNavigation currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
