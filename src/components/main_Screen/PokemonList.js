@@ -9,18 +9,19 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange 
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const handleTotalPagesChange = (newTotalPages) => {
-    onTotalPagesChange(newTotalPages);
-  };
 
   useEffect(() => {
+    const handleTotalPagesChange = (newTotalPages) => {
+      onTotalPagesChange(newTotalPages);
+    };
+
     const fetchPokemon = async () => {
       try {
         let limit = 50;
         if ((currentPage - 1) * 50 + limit > NUM_OF_POKEMON) {
             limit = NUM_OF_POKEMON - (currentPage - 1) * 50
         }
-        if (currentGen != "All"){
+        if (currentGen !== "All"){
           const requestLink = `https://pokeapi.co/api/v2/generation/${currentGen}`;
           const response = await axios.get(requestLink);
           const data = response.data.pokemon_species;
@@ -98,7 +99,7 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange 
       }
     };
     fetchPokemon();
-  }, [currentPage, currentGen, currentType]);
+  }, [currentPage, currentGen, currentType, onTotalPagesChange]);
 
   if (loading) {
     return <div className='loading-text'>Loading...</div>;

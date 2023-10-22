@@ -1,6 +1,6 @@
 import '../../css/style.css'
 import PokemonList from './PokemonList'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PageNavigation from './PageNavigation';
 import FilterRow from './FilterRow';
 
@@ -29,7 +29,7 @@ const MainScreen = () => {
 
   return (
     <div>
-      <h1 className='header'>Gen I, II, III, and IV Pokemon</h1>
+      <h1 className='header'>Pokedex</h1>
       <div>
         <FilterRow onGenChange={handleGenChange} onTypeChange={handleTypeChange}/>
       </div>
