@@ -5,7 +5,9 @@ const PokemonInfoTable = (pokemonData) => {
     const pokemon = pokemonData.pokemon.pokemon;
     const species = pokemonData.pokemon.species
     const abilities = pokemonData.pokemon.abilities
-    const [isHovered, setIsHovered] = useState(false);
+    const abilitiesAsStrings = abilities.map(abilityObject =>
+        abilityObject.ability.name[0].toUpperCase() + abilityObject.ability.name.slice(1)
+    );
     const abilitiesList = abilities.map((abilitiyObject, index) => (
         <>
             <span
@@ -36,7 +38,7 @@ const PokemonInfoTable = (pokemonData) => {
                         {pokemon.types.map((typeObject, index) => (
                             <span key={index}>
                                 {typeObject.type.name[0].toUpperCase() + typeObject.type.name.slice(1)}
-                                {index !== pokemon.types.length - 1 && " "} {/* Add space unless it's the last item */}
+                                {index !== pokemon.types.length - 1 && " "} {}
                             </span>
                         ))}
                     </td>
@@ -58,8 +60,10 @@ const PokemonInfoTable = (pokemonData) => {
                     <td>
                         {abilitiesList.map((ability, index) => (
                             <span key={index}>
-                                {ability}
-                                {index !== abilitiesList.length - 1 && ""} {}
+                                <a href={`https://pokemondb.net/ability/${abilitiesAsStrings[index]}`} className='no-underline-hyperlink'>
+                                    {ability}
+                                    {index !== abilitiesList.length - 1 && ""} {}
+                                </a>
                             </span>
                         ))}
                     </td>

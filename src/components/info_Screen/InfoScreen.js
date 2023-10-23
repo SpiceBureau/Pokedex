@@ -79,11 +79,11 @@ const InfoScreen = () => {
         <div className='page'>
             <Link onClick={handleLinkClick}><h1 className='header'>Pokémon Info</h1></Link>
             <NavigationArrows 
-            currentPokemonID={pokemon.id} 
-            onNextLinkClick={handleNextLinkClick} 
-            onPreviousLinkClick={handlePreviousLinkClick} 
-            previousPokemonName={previousPokemonName}
-            nextPokemonName={nextPokemonName}
+                currentPokemonID={pokemon.id} 
+                onNextLinkClick={handleNextLinkClick} 
+                onPreviousLinkClick={handlePreviousLinkClick} 
+                previousPokemonName={previousPokemonName}
+                nextPokemonName={nextPokemonName}
             />
             <div className='content'>
                 <div className='infoSprite'>

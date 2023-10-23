@@ -181,6 +181,9 @@ input[type="number"] {
     max-width: 400px;
 }
 
+.infoTable-cells {
+    border: 1px solid #000;
+}
 .infoTable-cells td {
     padding: 10px;
 }
@@ -189,6 +192,10 @@ input[type="number"] {
     flex: 1;
     padding-top: 50px;
     font-size: 20px;
+}
+
+.stats-cells {
+    border: 1px solid #000;
 }
 
 .stats-cells-stat {
@@ -222,11 +229,17 @@ input[type="number"] {
 .pokemon-navigation-previous {
     float: left; 
     padding-left: 10px;
+    text-decoration: none;
 }
 
 .pokemon-navigation-next {
     float: right; 
     padding-right: 10px;
+    text-decoration: none;
+}
+
+.no-underline-hyperlink {
+    text-decoration: none;
 }
 
   
