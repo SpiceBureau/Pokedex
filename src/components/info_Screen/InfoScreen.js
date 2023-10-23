@@ -7,6 +7,7 @@ import PokemonInfoTable from './PokemonInfoTable'
 const InfoScreen = () => {
     const [pokemon, setPokemon] = useState({});
     const [species, setSpieces] = useState({});
+    const [abilities, setAbilities] = useState({});
     const [loading, setLoading] = useState(true);
   
     useEffect(() => {
@@ -19,8 +20,11 @@ const InfoScreen = () => {
 
                 const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
                 const englishGenus = speciesResponse.data.genera.find((genus) => genus.language.name === 'en').genus;
+
+                
                 setPokemon(data);
                 setSpieces(englishGenus);
+                setAbilities(data.abilities);
                 setLoading(false); 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -45,7 +49,8 @@ const InfoScreen = () => {
                     <PokemonInfoTable pokemon={
                         {
                             pokemon: pokemon,
-                            species: species
+                            species: species,
+                            abilities: abilities
                         }
                     }/>
                 </div>
