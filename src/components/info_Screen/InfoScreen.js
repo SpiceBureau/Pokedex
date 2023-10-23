@@ -4,14 +4,19 @@ import axios from 'axios';
 import PokemonImage from './PokemonImage';
 import PokemonInfoTable from './PokemonInfoTable'
 import BaseStatsTable from './BaseStatssTable';
+import { Link, useNavigate } from 'react-router-dom';
 
 const InfoScreen = () => {
+    const navigate = useNavigate();
     const [pokemon, setPokemon] = useState({});
     const [species, setSpieces] = useState({});
     const [abilities, setAbilities] = useState({});
     const [stats, setStats] = useState({});
     const [loading, setLoading] = useState(true);
-  
+    
+    const handleLinkClick = () => {
+        navigate('/')
+    };
     useEffect(() => {
         const url = window.location.href;
         const id = url.split("/").slice(-1)[0];
@@ -26,7 +31,7 @@ const InfoScreen = () => {
                 const totalStatValue = data.stats.reduce((sum, statsObject) => sum + statsObject.base_stat, 0);
                 const statsWithTotal = [
                 ...data.stats.map((statsObject) => ({
-                    stat: statsObject.stat.name,
+                    stat: (statsObject.stat.name[0].toUpperCase() + statsObject.stat.name.slice(1)).split("-").join(" "),
                     value: statsObject.base_stat,
                 })),
                 {
@@ -54,7 +59,7 @@ const InfoScreen = () => {
     }
     return (
         <div className='page'>
-            <h1 className='header'>Pokémon Info</h1>
+            <Link onClick={handleLinkClick}><h1 className='header'>Pokémon Info</h1></Link>
             <div className='content'>
                 <div className='infoSprite'>
                     <PokemonImage id={pokemon.id} sprite={pokemon.sprites.other.dream_world.front_default} />

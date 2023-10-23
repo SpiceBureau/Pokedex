@@ -2,24 +2,26 @@ import React from 'react';
 import '../../css/style.css';
 
 const BaseStatsTable = (stats) => {
-  const maxStatValue = 255;
-  const baseStats = stats.stats
-  const colorGradient = (value) => {
-    if (value <= 25) {
-        return "#f34444"
-    }
-    if (value <= 55) {
-        return "#ff7f0f"
-    }
-    if (value <= 85) {
-        return "#ffdd57"
-    }
-    if (value <= 115) {
-        return "#a0e515"
-    }
-    return "#23cd5e"
-  }
+    const maxStatValue = 255;
+    const baseStats = stats.stats
 
+    const colorGradient = (value) => {
+        if (value <= 25) {
+            return "#f34444"
+        }
+        if (value <= 55) {
+            return "#ff7f0f"
+        }
+        if (value <= 85) {
+            return "#ffdd57"
+        }
+        if (value <= 115) {
+            return "#a0e515"
+        }
+        return "#23cd5e"
+    }
+
+    
   return (
     <>
         <h2>Base stats</h2>
