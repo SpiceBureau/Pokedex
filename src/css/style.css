@@ -169,49 +169,45 @@ input[type="number"] {
     justify-content: center;
 }
   
-img {
+.sprite-img {
     max-width: 600px;
     max-height: 600px;
 }
 .info-table {
-    flex: 2;
+    flex: 1;
     padding-top: 50px;
-    padding-left: 100px;
+    padding-left: 50px;
     font-size: 20px;
+    max-width: 400px;
 }
 
 .infoTable-cells td {
     padding: 10px;
 }
-.tooltip-content {
-    position: fixed;
-    background-color: #333;
-    color: #fff;
-    padding: 5px;
-    border-radius: 5px;
-    opacity: 1;
-    transition: opacity 0.3s;
-    z-index: 999;
+
+.stats-table {
+    flex: 1;
+    padding-top: 50px;
+    font-size: 20px;
 }
-  
-.tooltip-content::after {
-    content: '';
-    position: absolute;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #333 transparent;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+
+.stats-cells-stat {
+    padding: 10px;
+    text-align: left;
 }
-  
-  
-.tooltip-trigger {
-    cursor: pointer;
+.stats-cells-value {
+    padding: 10px;
+    text-align: left;
 }
-  
-.tooltip-trigger:hover + .tooltip-content {
-    opacity: 1;
+.stats-cells-bar {
+    padding: 10px;
 }
+.stat-bar {
+    height: 20px;
+}
+
+
+
+  
   
   

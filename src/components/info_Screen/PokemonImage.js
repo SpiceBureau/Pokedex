@@ -6,7 +6,7 @@ const PokemonImage = ({sprite, id}) => {
 
     return (
         <div>
-        <img src={sprite} alt={id} />
+        <img src={sprite} alt={id} className='sprite-img'/>
         </div>
     );
 };

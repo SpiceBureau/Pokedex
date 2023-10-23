@@ -32,7 +32,14 @@ const PokemonInfoTable = (pokemonData) => {
                 </tr>
                 <tr>
                     <td><b>Type</b></td>
-                    <td>{pokemon.types.map((typeObject) => typeObject.type.name[0].toUpperCase() + typeObject.type.name.slice(1)).join(" ")}</td>
+                    <td>
+                        {pokemon.types.map((typeObject, index) => (
+                            <span key={index}>
+                                {typeObject.type.name[0].toUpperCase() + typeObject.type.name.slice(1)}
+                                {index !== pokemon.types.length - 1 && " "} {/* Add space unless it's the last item */}
+                            </span>
+                        ))}
+                    </td>
                 </tr>
                 <tr>
                     <td><b>Species</b></td>
@@ -48,7 +55,14 @@ const PokemonInfoTable = (pokemonData) => {
                 </tr>
                 <tr>
                     <td><b>Abilities</b></td>
-                    <td>{abilitiesList}</td>
+                    <td>
+                        {abilitiesList.map((ability, index) => (
+                            <span key={index}>
+                                {ability}
+                                {index !== abilitiesList.length - 1 && ""} {}
+                            </span>
+                        ))}
+                    </td>
                 </tr>
                 </tbody>
             </table>
