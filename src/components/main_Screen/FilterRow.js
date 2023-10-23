@@ -1,6 +1,5 @@
 import '../../css/style.css';
 import React from 'react';
-import Switch from "react-switch";
 
 function FilterRow({ onGenChange, onTypeChange, onSpriteChange }) {
     const handleGenChange = (event) => {

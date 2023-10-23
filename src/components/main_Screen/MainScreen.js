@@ -9,9 +9,7 @@ const NUM_OF_POKEMON = 1010;
 const MainScreen = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(Math.floor((NUM_OF_POKEMON / 50) + 1));
-    const [currentGen, setCurrentGen] = useState("All");
-    const [currentType, setCurrentType] = useState("All");
-    const [threeDSprites, setThreeDSprites] = useState(false);
+    const [currentFilters, setCurrentFilters] = useState({currentGen: 'All', currentType: 'All', threeDSprites: false});
 
     const handlePageChange = (newPage) => {
         if (newPage > totalPages) {
@@ -23,15 +21,27 @@ const MainScreen = () => {
         setTotalPages(newTotalPages);
     };
     const handleGenChange = (newGen) => {
-        setCurrentGen(newGen);
+        setCurrentFilters({
+            currentGen: newGen,
+            currentType: currentFilters.currentType,
+            threeDSprites: currentFilters.threeDSprites,
+        });
         setCurrentPage(1);
     };
     const handleTypeChange = (newType) => {
-        setCurrentType(newType);
+        setCurrentFilters({
+            currentGen: currentFilters.currentGen,
+            currentType: newType,
+            threeDSprites: currentFilters.threeDSprites,
+        });
         setCurrentPage(1);
     };
     const handleSpritesChange = (changedThreeDSprites) => {
-        setThreeDSprites(changedThreeDSprites);
+        setCurrentFilters({
+            currentGen: currentFilters.currentGen,
+            currentType: currentFilters.currentType,
+            threeDSprites: changedThreeDSprites,
+        });
     };
 
     return (
@@ -41,7 +51,7 @@ const MainScreen = () => {
                 <FilterRow onGenChange={handleGenChange} onTypeChange={handleTypeChange} onSpriteChange={handleSpritesChange} />
             </div>
             <div>
-                <PokemonList currentPage={currentPage} currentGen={currentGen} currentType={currentType} onTotalPagesChange={handleTotalPagesChange} threeDSprites={threeDSprites} />
+                <PokemonList currentPage={currentPage} currentFilters={currentFilters} onTotalPagesChange={handleTotalPagesChange} />
             </div>
             <div>
                 <PageNavigation currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />

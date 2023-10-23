@@ -5,7 +5,7 @@ import '../../css/style.css';
 
 const NUM_OF_POKEMON = 1010;
 
-const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange, threeDSprites }) => {
+const PokemonList = ({ currentPage, currentFilters, onTotalPagesChange }) => {
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -13,15 +13,14 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange,
         const handleTotalPagesChange = (newTotalPages) => {
             onTotalPagesChange(newTotalPages);
         };
-
         const fetchPokemon = async () => {
             try {
                 let limit = 50;
                 if ((currentPage - 1) * 50 + limit > NUM_OF_POKEMON) {
                     limit = NUM_OF_POKEMON - (currentPage - 1) * 50;
                 }
-                if (currentGen !== "All") {
-                    const requestLink = `https://pokeapi.co/api/v2/generation/${currentGen}`;
+                if (currentFilters.currentGen !== "All") {
+                    const requestLink = `https://pokeapi.co/api/v2/generation/${currentFilters.currentGen}`;
                     const response = await axios.get(requestLink);
                     const data = response.data.pokemon_species;
                     data.sort((a, b) => {
@@ -34,12 +33,12 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange,
                             const id = pokemon.url.split('/').slice(-2, -1)[0];
                             const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${parseInt(id)}/`);
                             const types = pokemonResponse.data.types;
-                            const correctType = types.some(pokeType => pokeType.type.name === currentType);
+                            const correctType = types.some(pokeType => pokeType.type.name === currentFilters.currentType);
 
-                            return (currentType === "All" || correctType) ?
+                            return (currentFilters.currentType === "All" || correctType) ?
                                 {
                                     name: pokemon.name,
-                                    sprite: threeDSprites ? pokemonResponse.data.sprites.other.home.front_default : pokemonResponse.data.sprites.front_default,
+                                    sprite: currentFilters.threeDSprites ? pokemonResponse.data.sprites.other.home.front_default : pokemonResponse.data.sprites.front_default,
                                     id: id
                                 } : null;
                         });
@@ -51,7 +50,7 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange,
                     setPokemonList(filteredPokemonData.slice((currentPage - 1) * 50, limit + (currentPage - 1) * 50));
                     setLoading(false);
                 } else {
-                    if (currentType === "All") {
+                    if (currentFilters.currentType === "All") {
                         const requestLink = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${(currentPage - 1) * 50}`;
                         const response = await axios.get(requestLink);
                         const data = response.data.results;
@@ -61,7 +60,7 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange,
                                 const id = pokemon.url.split('/').slice(-2, -1)[0];
                                 return {
                                     name: pokemon.name,
-                                    sprite: threeDSprites ? pokemonResponse.data.sprites.other.home.front_default : pokemonResponse.data.sprites.front_default,
+                                    sprite: currentFilters.threeDSprites ? pokemonResponse.data.sprites.other.home.front_default : pokemonResponse.data.sprites.front_default,
                                     id: id
                                 };
                             });
@@ -71,7 +70,7 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange,
                         setPokemonList(filteredPokemonData);
                         setLoading(false);
                     } else {
-                        const requestLink = `https://pokeapi.co/api/v2/type/${currentType}`;
+                        const requestLink = `https://pokeapi.co/api/v2/type/${currentFilters.currentType}`;
                         const response = await axios.get(requestLink);
                         const data = response.data.pokemon;
                         const promises = data
@@ -80,7 +79,7 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange,
                                 const id = pokemon.pokemon.url.split('/').slice(-2, -1)[0];
                                 return {
                                     name: pokemon.pokemon.name,
-                                    sprite: threeDSprites ? pokemonResponse.data.sprites.other.home.front_default : pokemonResponse.data.sprites.front_default,
+                                    sprite: currentFilters.threeDSprites ? pokemonResponse.data.sprites.other.home.front_default : pokemonResponse.data.sprites.front_default,
                                     id: id
                                 };
                             });
@@ -96,7 +95,7 @@ const PokemonList = ({ currentPage, currentGen, currentType, onTotalPagesChange,
             }
         };
         fetchPokemon();
-    }, [currentPage, currentGen, currentType, onTotalPagesChange, threeDSprites]);
+    }, [currentPage, currentFilters, onTotalPagesChange]);
 
     if (loading) {
         return <div className='loading-text'>Loading...</div>;
