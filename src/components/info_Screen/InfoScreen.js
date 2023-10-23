@@ -7,6 +7,8 @@ import BaseStatsTable from './BaseStatssTable';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import NavigationArrows from './NavigationArrows';
 
+const NUM_OF_POKEMON = 1010;
+
 const InfoScreen = () => {
     const { name } = useParams();
     const navigate = useNavigate();
@@ -37,13 +39,24 @@ const InfoScreen = () => {
 
                 const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
                 const englishGenus = speciesResponse.data.genera.find((genus) => genus.language.name === 'en').genus;
-
-                const previousPokemonResponse = await axios.get((`https://pokeapi.co/api/v2/pokemon/${data.id - 1}`));
-                const previousData = previousPokemonResponse.data;
-
-                const nextPokemonResponse = await axios.get((`https://pokeapi.co/api/v2/pokemon/${data.id + 1}`));
-                const nextData = nextPokemonResponse.data;
-
+                
+                if (data.id !== 1){
+                    const previousPokemonResponse = await axios.get((`https://pokeapi.co/api/v2/pokemon/${data.id - 1}`));
+                    const previousData = previousPokemonResponse.data;
+                    setPreviousPokemonName(previousData.name)
+                }
+                if (data.id !== NUM_OF_POKEMON){
+                    const nextPokemonResponse = await axios.get((`https://pokeapi.co/api/v2/pokemon/${data.id + 1}`));
+                    const nextData = nextPokemonResponse.data;
+                    setNextPokemonName(nextData.name)
+                }
+                if (data.id === 1){
+                    setPreviousPokemonName("")
+                }
+                
+                if (data.id === NUM_OF_POKEMON){
+                    setNextPokemonName("")
+                }
                 const totalStatValue = data.stats.reduce((sum, statsObject) => sum + statsObject.base_stat, 0);
                 const statsWithTotal = [
                 ...data.stats.map((statsObject) => ({
@@ -57,8 +70,6 @@ const InfoScreen = () => {
                 ];
 
                 setPokemon(data);
-                setPreviousPokemonName(previousData.name)
-                setNextPokemonName(nextData.name)
                 setSpieces(englishGenus);
                 setAbilities(data.abilities);
                 setStats(statsWithTotal);
