@@ -9,14 +9,14 @@ function PokemonCard({ name, sprite, cleanName }) {
   const handleLinkClick = () => { 
     navigate(`/infoScreen/${cleanName}`);
   }
-  return (
-    <Link onClick={handleLinkClick}>
-      <div className="card">
-      <img src={sprite} alt={name} />
-      <p>{name}</p>
-    </div>
-    </Link>
-  );
-}
+    return (
+        <Link onClick={handleLinkClick}>
+            <div className="card">
+                <img src={sprite} alt={name} />
+                <p>{name}</p>
+            </div>
+        </Link>
+    );
+    }
 
 export default PokemonCard;

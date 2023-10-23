@@ -206,8 +206,28 @@ input[type="number"] {
     height: 15px;
     border-radius: 7px;
 }
+.pokemon-navigation {
+    width: 100%; 
+}
 
+.pokemon-navigation-previous,
+.pokemon-navigation-next {
+    width: fit-content;
+    display: inline-block; 
+    text-align: center; 
+    box-sizing: border-box; 
+    font-size: 20px;
+}
 
+.pokemon-navigation-previous {
+    float: left; 
+    padding-left: 10px;
+}
+
+.pokemon-navigation-next {
+    float: right; 
+    padding-right: 10px;
+}
 
   
   

@@ -4,18 +4,28 @@ import axios from 'axios';
 import PokemonImage from './PokemonImage';
 import PokemonInfoTable from './PokemonInfoTable'
 import BaseStatsTable from './BaseStatssTable';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import NavigationArrows from './NavigationArrows';
 
 const InfoScreen = () => {
+    const { name } = useParams();
     const navigate = useNavigate();
     const [pokemon, setPokemon] = useState({});
     const [species, setSpieces] = useState({});
     const [abilities, setAbilities] = useState({});
     const [stats, setStats] = useState({});
+    const [nextPokemonName, setNextPokemonName] = useState("")
+    const [previousPokemonName, setPreviousPokemonName] = useState("")
     const [loading, setLoading] = useState(true);
     
     const handleLinkClick = () => {
         navigate('/')
+    };
+    const handlePreviousLinkClick = () => { 
+        navigate(`/infoScreen/${previousPokemonName.toLowerCase()}`)
+    };
+    const handleNextLinkClick = () => { 
+        navigate(`/infoScreen/${nextPokemonName.toLowerCase()}`)
     };
     useEffect(() => {
         const url = window.location.href;
@@ -28,6 +38,12 @@ const InfoScreen = () => {
                 const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
                 const englishGenus = speciesResponse.data.genera.find((genus) => genus.language.name === 'en').genus;
 
+                const previousPokemonResponse = await axios.get((`https://pokeapi.co/api/v2/pokemon/${data.id - 1}`));
+                const previousData = previousPokemonResponse.data;
+
+                const nextPokemonResponse = await axios.get((`https://pokeapi.co/api/v2/pokemon/${data.id + 1}`));
+                const nextData = nextPokemonResponse.data;
+
                 const totalStatValue = data.stats.reduce((sum, statsObject) => sum + statsObject.base_stat, 0);
                 const statsWithTotal = [
                 ...data.stats.map((statsObject) => ({
@@ -39,8 +55,10 @@ const InfoScreen = () => {
                     value: totalStatValue,
                 },
                 ];
-                
+
                 setPokemon(data);
+                setPreviousPokemonName(previousData.name)
+                setNextPokemonName(nextData.name)
                 setSpieces(englishGenus);
                 setAbilities(data.abilities);
                 setStats(statsWithTotal);
@@ -52,7 +70,7 @@ const InfoScreen = () => {
         };
   
       fetchPokemon();
-    }, []); 
+    }, [name]); 
 
     if (loading) {
         return <div>Loading...</div>;
@@ -60,6 +78,13 @@ const InfoScreen = () => {
     return (
         <div className='page'>
             <Link onClick={handleLinkClick}><h1 className='header'>Pokémon Info</h1></Link>
+            <NavigationArrows 
+            currentPokemonID={pokemon.id} 
+            onNextLinkClick={handleNextLinkClick} 
+            onPreviousLinkClick={handlePreviousLinkClick} 
+            previousPokemonName={previousPokemonName}
+            nextPokemonName={nextPokemonName}
+            />
             <div className='content'>
                 <div className='infoSprite'>
                     <PokemonImage id={pokemon.id} sprite={pokemon.sprites.other.dream_world.front_default} />
