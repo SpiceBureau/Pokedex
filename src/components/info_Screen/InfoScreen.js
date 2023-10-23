@@ -1,41 +1,57 @@
-import '../../css/style.css'
+import '../../css/style.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PokemonImage from './PokemonImage'
-
+import PokemonImage from './PokemonImage';
+import PokemonInfoTable from './PokemonInfoTable'
 
 const InfoScreen = () => {
-  const url = window.location.href;
-  const id = url.split("/").slice(-1)[0];
-  const [pokemonSprite, setPokemonSprite] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPokemon = async () => {
-      try {
-        const requestLink = `https://pokeapi.co/api/v2/pokemon/${id}`;
-        const response = await axios.get(requestLink);
-        const data = response.data;
-        setPokemonSprite(data.sprites.other.dream_world.front_default);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchPokemon();
-    setLoading(false);
-    }, []);
+    const [pokemon, setPokemon] = useState({});
+    const [species, setSpieces] = useState({});
+    const [loading, setLoading] = useState(true);
   
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    useEffect(() => {
+        const url = window.location.href;
+        const id = url.split("/").slice(-1)[0];
+        const fetchPokemon = async () => {
+            try {
+                const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                const data = pokemonResponse.data;
 
-  return (
-    <div>
-      <h1 className='header'>Pokémon Info</h1>
-      <PokemonImage id={id} sprite={pokemonSprite}/>
-    </div>
-  );
+                const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+                const englishGenus = speciesResponse.data.genera.find((genus) => genus.language.name === 'en').genus;
+                setPokemon(data);
+                setSpieces(englishGenus);
+                setLoading(false); 
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false); 
+            }
+        };
+  
+      fetchPokemon();
+    }, []); 
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    return (
+        <div className='page'>
+            <h1 className='header'>Pokémon Info</h1>
+            <div className='content'>
+                <div className='infoSprite'>
+                    <PokemonImage id={pokemon.id} sprite={pokemon.sprites.other.dream_world.front_default} />
+                </div>
+                <div className="info-table">
+                    <PokemonInfoTable pokemon={
+                        {
+                            pokemon: pokemon,
+                            species: species
+                        }
+                    }/>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default InfoScreen;

@@ -149,3 +149,32 @@ input[type="number"] {
 .input.sprites {
   max-width: 70px;
 }
+
+.page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    display: flex;
+    flex: 1;
+}
+
+.infoSprite {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+img {
+    max-width: 600px;
+    max-height: 600px;
+}
+.info-table {
+    flex: 2;
+    padding: 20px;
+}
+  
+  
