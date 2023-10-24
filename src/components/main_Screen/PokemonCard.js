@@ -7,7 +7,6 @@ function PokemonCard({ name, sprite, cleanName }) {
   const navigate = useNavigate();
 
   const handleLinkClick = (e) => { 
-    console.log(e.button)
     if (e.button === 1) {
         window.open(`${window.location.origin}/infoScreen/${cleanName}`)
       }
