@@ -1,247 +1,257 @@
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #D3D3D3; 
-  font-family: Arial, sans-serif;
-}
-
-.header {
-  text-align: center;
-  color: #FFF;
-  background-color: #0D47A1;
-  font-size: 36px;
-  padding: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header::before {
-  content: '';
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  background-image: url('../../public/favicon.ico');
-  background-size: cover;
-  margin-right: 10px;
-}
-
-.bottom-header {
-  text-align: center;
-  background-color: #0D47A1; 
-  color: #FFF;
-  font-size: 18px;
-  padding: 15px;
-  border-top: 1px solid #0D47A1; 
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-div {
-  margin: 0;
-  padding: 0;
-  background-color: #D3D3D3; 
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  font-size: 24px;
-}
-
-.main {
-  background-color: #e0e0e0; 
-  padding: 20px;
-}
-
-.page-navigation-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.page-navigation {
-  display: flex;
-  align-items: center;
-}
-
-.page-navigation button {
-  margin: 0 10px;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
     margin: 0;
-}
-input[type="number"] {
-    -moz-appearance: textfield;
-}
-
-.centered-input {
-  text-align: center;
-  width: 40px;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-  justify-items: center; 
-}
-
-.centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.loading-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 20px;
-}
-
-.table {
-  display: table;
-  padding-left: 10px;
-}
-
-.row {
-  display: table-row;
-}
-
-.cell {
-  display: table-cell;
-  padding: 5px;
-  width: auto;
-}
-
-.label.gen {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.select.gen {
-  padding-right: 20px;
-  max-width: 70px;
-}
-
-.label.type {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.select.type {
-  padding-right: 20px;
-  max-width: 70px;
-}
-
-.label.sprites {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.input.sprites {
-  max-width: 70px;
-}
-
-.page {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-.content {
-    display: flex;
-    flex: 1;
-    padding-left: 100px;
-}
-
-.infoSprite {
-    flex: 1;
+    padding: 0;
+    background-color: #afafaf; 
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    text-align: center;
+    color: #FFF;
+    background-color: #0D47A1;
+    font-size: 36px;
+    padding: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-}
+  }
   
-.sprite-img {
-    max-width: 600px;
-    max-height: 600px;
-}
-.info-table {
-    flex: 1;
-    padding-top: 50px;
-    padding-left: 50px;
+  .header::before {
+    content: '';
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url('../../public/favicon.ico');
+    background-size: cover;
+    margin-right: 10px;
+  }
+  
+  .bottom-header {
+    text-align: center;
+    background-color: #0D47A1; 
+    color: #FFF;
+    font-size: 18px;
+    padding: 15px;
+    border-top: 1px solid #0D47A1; 
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); 
+  }
+  
+  div {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  .main {
+    background-color: #e0e0e0; 
+    padding: 20px;
+  }
+  
+  .page-navigation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .page-navigation {
+    display: flex;
+    align-items: center;
+  }
+  
+  .page-navigation button {
+    margin: 0 10px;
+  }
+  
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+  input[type="number"] {
+      -moz-appearance: textfield;
+  }
+  
+  .centered-input {
+    text-align: center;
+    width: 40px;
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    justify-items: center; 
+  }
+  
+  .card {
+      background-color: whitesmoke;
+  }
+  
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .loading-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     font-size: 20px;
-    max-width: 400px;
-}
-
-.infoTable-cells {
-    border: 1px solid #000;
-}
-.infoTable-cells td {
-    padding: 10px;
-}
-
-.stats-table {
-    flex: 1;
-    padding-top: 50px;
-    font-size: 20px;
-}
-
-.stats-cells {
-    border: 1px solid #000;
-}
-
-.stats-cells-stat {
-    padding: 10px;
-    text-align: left;
-}
-.stats-cells-value {
-    padding: 10px;
-    text-align: left;
-}
-.stats-cells-bar {
-    padding: 10px;
-}
-.stat-bar {
-    height: 15px;
-    border-radius: 7px;
-}
-.pokemon-navigation {
-    width: 100%; 
-}
-
-.pokemon-navigation-previous,
-.pokemon-navigation-next {
-    width: fit-content;
-    display: inline-block; 
-    text-align: center; 
-    box-sizing: border-box; 
-    font-size: 20px;
-}
-
-.pokemon-navigation-previous {
-    float: left; 
+  }
+  
+  .table {
+    display: table;
     padding-left: 10px;
-    text-decoration: none;
-}
-
-.pokemon-navigation-next {
-    float: right; 
+  }
+  
+  .row {
+    display: table-row;
+  }
+  
+  .cell {
+    display: table-cell;
+    padding: 5px;
+    width: auto;
+  }
+  
+  .label.gen {
+    padding-left: 10px;
     padding-right: 10px;
-    text-decoration: none;
-}
-
-.no-underline-hyperlink {
-    text-decoration: none;
-}
-
+  }
   
+  .select.gen {
+    padding-right: 20px;
+    max-width: 70px;
+  }
   
+  .label.type {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   
+  .select.type {
+    padding-right: 20px;
+    max-width: 70px;
+  }
+  
+  .label.sprites {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .input.sprites {
+    max-width: 70px;
+  }
+  
+  .page {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+  }
+  .content {
+      display: flex;
+      flex: 1;
+      padding-left: 100px;
+      padding-right: 100px;
+  }
+  
+  .infoSprite {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+    
+  .sprite-img {
+      max-width: 500px;
+      max-height: 500px;
+  }
+  .info-table {
+      flex: 1;
+      padding-left: 50px;
+      font-size: 20px;
+      max-width: 400px;
+  }
+  
+  .infoTable-cells {
+      border: 1px solid #000;
+      background-color: whitesmoke;
+  }
+  .infoTable-cells td {
+      padding: 10px;
+  }
+  
+  .stats-table {
+      flex: 1;
+      font-size: 20px;
+  }
+  
+  .stats-cells {
+      border: 1px solid #000;
+      background-color: whitesmoke;
+      min-width: 634px;
+  }
+  
+  .stats-cells-stat {
+      padding-left: 10px;
+      text-align: left;
+      width: 152px;
+      height: 44px;
+  }
+  .stats-cells-value {
+      padding-left: 10px;
+      text-align: left;
+      width: 80px;
+  }
+  .stats-cells-bar {
+      padding: 10px;
+  }
+  .stat-bar {
+      height: 15px;
+      border-radius: 7px;
+  }
+  .pokemon-navigation {
+      width: 100%; 
+  }
+  
+  .pokemon-navigation-previous,
+  .pokemon-navigation-next {
+      width: fit-content;
+      display: inline-block; 
+      text-align: center; 
+      box-sizing: border-box; 
+      font-size: 20px;
+  }
+  
+  .pokemon-navigation-previous {
+      float: left; 
+      padding-left: 10px;
+      text-decoration: none;
+  }
+  
+  .pokemon-navigation-next {
+      float: right; 
+      padding-right: 10px;
+      text-decoration: none;
+  }
+  
+  .no-underline-hyperlink {
+      text-decoration: none;
+      color:inherit;
+  }
+  /* 
+  .evolution-tree {
+  
+  }
+     */
