@@ -10,6 +10,20 @@ import EvolutionTree from './EvolutionTree';
 
 const NUM_OF_POKEMON = 1010;
 
+function traverseEvolution(rawEvolutionData) {
+    let evolutionLine = [{
+        name: rawEvolutionData.species.name,
+        lvl: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].min_level : null,  
+        item: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].item : null  
+    }];
+    if (rawEvolutionData.evolves_to) {
+        for (const evolvedPokemon of rawEvolutionData.evolves_to) {
+            evolutionLine.push(...traverseEvolution(evolvedPokemon));
+        }
+    }
+    return evolutionLine;
+}
+
 const InfoScreen = () => {
     const { name } = useParams();
     const navigate = useNavigate();
@@ -31,21 +45,6 @@ const InfoScreen = () => {
     const handleNextLinkClick = () => { 
         navigate(`/infoScreen/${nextPokemonName.toLowerCase()}`)
     };
-    function traverseEvolution(rawEvolutionData) {
-        let evolutionLine = [{
-            name: rawEvolutionData.species.name,
-            lvl: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].min_level : null,  
-            item: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].item : null  
-        }];
-
-        //console.log(rawEvolutionData.evolution_details[0].item)
-        if (rawEvolutionData.evolves_to) {
-            for (const evolvedPokemon of rawEvolutionData.evolves_to) {
-                evolutionLine.push(...traverseEvolution(evolvedPokemon));
-            }
-        }
-        return evolutionLine;
-    }
     async function getSprite(name) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
         const data = await response.json();
