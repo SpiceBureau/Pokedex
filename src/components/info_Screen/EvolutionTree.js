@@ -2,7 +2,7 @@ import '../../css/style.css'
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const EvolutionTree = ({evolutionData, onEvolutionSpriteClick}) => {
+const EvolutionTree = ({evolutionData, onEvolutionSpriteClick, pokemonName}) => {
     return (
         <div>
             <h2 className='evolution-header'>Evolution Tree </h2>
@@ -28,7 +28,7 @@ const EvolutionTree = ({evolutionData, onEvolutionSpriteClick}) => {
                         </div>
                     ))
                 ) : (
-                    <p>This pokemon does not evolve</p>
+                    <p>{pokemonName} does not evolve</p>
                 )}
             </div>
         </div>

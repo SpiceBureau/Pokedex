@@ -158,7 +158,7 @@ const InfoScreen = () => {
                 </div>
             </div>
             <div className='evolution-table'>
-                <EvolutionTree evolutionData={evolutionData} onEvolutionSpriteClick={handleEvolutionSpriteClick}/>
+                <EvolutionTree evolutionData={evolutionData} onEvolutionSpriteClick={handleEvolutionSpriteClick} pokemonName={pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}/>
             </div>
         </div>
     );

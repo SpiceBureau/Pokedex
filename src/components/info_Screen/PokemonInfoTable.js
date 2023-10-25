@@ -60,7 +60,7 @@ const PokemonInfoTable = (pokemonData) => {
                     <td>
                         {abilitiesList.map((ability, index) => (
                             <span key={index}>
-                                <a href={`https://pokemondb.net/ability/${abilitiesAsStrings[index]}`} className='no-underline-hyperlink'>
+                                <a href={`https://pokemondb.net/ability/${abilitiesAsStrings[index]}`} >
                                     {ability}
                                     {index !== abilitiesList.length - 1 && ""} {}
                                 </a>
