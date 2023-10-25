@@ -18,6 +18,7 @@ const PokemonInfoTable = (pokemonData) => {
             </span>
         </>
       ));
+
     return (
         <>
             <h2>Pokémon Information</h2>
@@ -76,6 +77,5 @@ function metersToFeetAndInches(meters) {
     const feet = Math.floor(inches / 12).toFixed(0);
     const remainingInches = (Math.round(inches % 12)).toFixed(0);
     return `${feet}' ${remainingInches}''`
-}
-
+    }
 export default PokemonInfoTable;

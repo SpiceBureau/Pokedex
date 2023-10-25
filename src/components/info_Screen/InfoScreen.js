@@ -63,6 +63,7 @@ const InfoScreen = () => {
                 setAbilities(data.abilities);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setLoading(false); 
             }
         };
 
@@ -75,20 +76,11 @@ const InfoScreen = () => {
                 const evoChain = evolutionResponse.data.chain;
                 const evolutionLine = traverseEvolution(evoChain);  
                 
-                const newEvolutionLine = await Promise.all(evolutionLine.map(async (element) => {
-                    const spriteResponse = await getSprite(element.name);
-                    
-                    return {
-                        name: element.name,
-                        sprite: spriteResponse,
-                        lvl: element.lvl
-                    };
-                }));
-
                 setSpieces(englishGenus);
-                setEvolutionData(newEvolutionLine);
+                setEvolutionData(evolutionLine);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setLoading(false); 
             }
         }
 
@@ -125,11 +117,11 @@ const InfoScreen = () => {
                     value: totalStatValue,
                 },
                 ];
-
                 setStats(statsWithTotal);
                 setLoading(false); 
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setLoading(false); 
             }
         }
   
@@ -141,7 +133,6 @@ const InfoScreen = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
-
     return (
         <div className='page'>
             <h1 className='header'><Link className='no-underline-hyperlink' onClick={handleLinkClick}>Pokémon Info </Link></h1>
@@ -169,6 +160,7 @@ const InfoScreen = () => {
                     <BaseStatsTable stats={stats}/>
                 </div>
             </div>
+            <EvolutionTree />
         </div>
     );
 };
