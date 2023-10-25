@@ -15,6 +15,7 @@ const InfoScreen = () => {
     const [pokemon, setPokemon] = useState({});
     const [species, setSpieces] = useState({});
     const [abilities, setAbilities] = useState({});
+    const [evolutionData, setEvolutionData] = useState({});
     const [stats, setStats] = useState({});
     const [nextPokemonName, setNextPokemonName] = useState("")
     const [previousPokemonName, setPreviousPokemonName] = useState("")
@@ -29,6 +30,25 @@ const InfoScreen = () => {
     const handleNextLinkClick = () => { 
         navigate(`/infoScreen/${nextPokemonName.toLowerCase()}`)
     };
+    function traverseEvolution(rawEvolutionData) {
+        let evolutionLine = [{
+            name: rawEvolutionData.species.name,
+            lvl: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].min_level : []
+        }];
+
+        if (rawEvolutionData.evolves_to) {
+            for (const evolvedPokemon of rawEvolutionData.evolves_to) {
+                evolutionLine.push(...traverseEvolution(evolvedPokemon));
+            }
+        }
+        return evolutionLine;
+    }
+    async function getSprite(name) {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        const data = await response.json();
+        return data.sprites.front_default;
+      }
+
     useEffect(() => {
         const url = window.location.href;
         const id = url.split("/").slice(-1)[0];
@@ -39,6 +59,20 @@ const InfoScreen = () => {
 
                 const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
                 const englishGenus = speciesResponse.data.genera.find((genus) => genus.language.name === 'en').genus;
+
+                const evolutionResponse = await axios.get(speciesResponse.data.evolution_chain.url);
+                const evoChain = evolutionResponse.data.chain;
+                const evolutionLine = traverseEvolution(evoChain);  
+                
+                const newEvolutionLine = await Promise.all(evolutionLine.map(async (element) => {
+                    const spriteResponse = await getSprite(element.name);
+                    
+                    return {
+                        name: element.name,
+                        sprite: spriteResponse,
+                        lvl: element.lvl
+                    };
+                }));
                 
                 if (data.id !== 1){
                     const previousPokemonResponse = await axios.get((`https://pokeapi.co/api/v2/pokemon/${data.id - 1}`));
@@ -67,10 +101,12 @@ const InfoScreen = () => {
                     stat: "Total",
                     value: totalStatValue,
                 },
-                ];
+                ];  
+                console.log(newEvolutionLine)
 
                 setPokemon(data);
                 setSpieces(englishGenus);
+                setEvolutionData(newEvolutionLine);
                 setAbilities(data.abilities);
                 setStats(statsWithTotal);
                 setLoading(false); 
