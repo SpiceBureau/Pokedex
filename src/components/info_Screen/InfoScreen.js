@@ -6,7 +6,6 @@ import PokemonInfoTable from './PokemonInfoTable'
 import BaseStatsTable from './BaseStatssTable';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import NavigationArrows from './NavigationArrows';
-import EvolutionTree from './EvolutionTree';
 
 const NUM_OF_POKEMON = 1010;
 
@@ -15,7 +14,6 @@ const InfoScreen = () => {
     const navigate = useNavigate();
     const [pokemon, setPokemon] = useState({});
     const [species, setSpieces] = useState({});
-    const [evolutionData, setEvolutionData] = useState({});
     const [abilities, setAbilities] = useState({});
     const [stats, setStats] = useState({});
     const [nextPokemonName, setNextPokemonName] = useState("")
@@ -31,64 +29,17 @@ const InfoScreen = () => {
     const handleNextLinkClick = () => { 
         navigate(`/infoScreen/${nextPokemonName.toLowerCase()}`)
     };
-    
-    function traverseEvolution(rawEvolutionData) {
-        let evolutionLine = [{
-            name: rawEvolutionData.species.name,
-            lvl: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].min_level : []
-        }];
-
-        if (rawEvolutionData.evolves_to) {
-            for (const evolvedPokemon of rawEvolutionData.evolves_to) {
-                evolutionLine.push(...traverseEvolution(evolvedPokemon));
-            }
-        }
-        return evolutionLine;
-    }
-
-    async function getSprite(name) {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-        const data = await response.json();
-        return data.sprites.front_default;
-      }
-
     useEffect(() => {
+        const url = window.location.href;
+        const id = url.split("/").slice(-1)[0];
         const fetchPokemon = async () => {
             try {
-                const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+                const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
                 const data = pokemonResponse.data;
 
-                setPokemon(data);
-                
-                setAbilities(data.abilities);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setLoading(false); 
-            }
-        };
-
-        const fetchSpecies = async () => {
-            try {
-                const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`);
+                const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
                 const englishGenus = speciesResponse.data.genera.find((genus) => genus.language.name === 'en').genus;
-
-                const evolutionResponse = await axios.get(speciesResponse.data.evolution_chain.url);
-                const evoChain = evolutionResponse.data.chain;
-                const evolutionLine = traverseEvolution(evoChain);  
                 
-                setSpieces(englishGenus);
-                setEvolutionData(evolutionLine);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setLoading(false); 
-            }
-        }
-
-        const fetchStats = async () => {  
-            try {
-                const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-                const data = pokemonResponse.data;
-
                 if (data.id !== 1){
                     const previousPokemonResponse = await axios.get((`https://pokeapi.co/api/v2/pokemon/${data.id - 1}`));
                     const previousData = previousPokemonResponse.data;
@@ -117,17 +68,19 @@ const InfoScreen = () => {
                     value: totalStatValue,
                 },
                 ];
+
+                setPokemon(data);
+                setSpieces(englishGenus);
+                setAbilities(data.abilities);
                 setStats(statsWithTotal);
                 setLoading(false); 
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setLoading(false); 
             }
-        }
+        };
   
-        fetchPokemon();
-        fetchSpecies();
-        fetchStats();
+      fetchPokemon();
     }, [name]); 
 
     if (loading) {
@@ -135,7 +88,7 @@ const InfoScreen = () => {
     }
     return (
         <div className='page'>
-            <h1 className='header'><Link className='no-underline-hyperlink' onClick={handleLinkClick}>Pokémon Info </Link></h1>
+            <Link onClick={handleLinkClick}><h1 className='header'>Pokémon Info</h1></Link>
             <NavigationArrows 
                 currentPokemonID={pokemon.id} 
                 onNextLinkClick={handleNextLinkClick} 
@@ -160,7 +113,6 @@ const InfoScreen = () => {
                     <BaseStatsTable stats={stats}/>
                 </div>
             </div>
-            <EvolutionTree />
         </div>
     );
 };

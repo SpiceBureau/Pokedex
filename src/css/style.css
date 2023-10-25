@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #afafaf; 
+  background-color: #D3D3D3; 
   font-family: Arial, sans-serif;
 }
 
@@ -41,6 +41,7 @@ body {
 div {
   margin: 0;
   padding: 0;
+  background-color: #D3D3D3; 
   font-family: Arial, sans-serif;
 }
 
@@ -88,10 +89,6 @@ input[type="number"] {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
   justify-items: center; 
-}
-
-.card {
-    background-color: whitesmoke;
 }
 
 .centered {
@@ -163,7 +160,6 @@ input[type="number"] {
     display: flex;
     flex: 1;
     padding-left: 100px;
-    padding-right: 100px;
 }
 
 .infoSprite {
@@ -174,11 +170,12 @@ input[type="number"] {
 }
   
 .sprite-img {
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 600px;
+    max-height: 600px;
 }
 .info-table {
     flex: 1;
+    padding-top: 50px;
     padding-left: 50px;
     font-size: 20px;
     max-width: 400px;
@@ -186,7 +183,6 @@ input[type="number"] {
 
 .infoTable-cells {
     border: 1px solid #000;
-    background-color: whitesmoke;
 }
 .infoTable-cells td {
     padding: 10px;
@@ -194,25 +190,21 @@ input[type="number"] {
 
 .stats-table {
     flex: 1;
+    padding-top: 50px;
     font-size: 20px;
 }
 
 .stats-cells {
     border: 1px solid #000;
-    background-color: whitesmoke;
-    min-width: 634px;
 }
 
 .stats-cells-stat {
-    padding-left: 10px;
+    padding: 10px;
     text-align: left;
-    width: 152px;
-    height: 44px;
 }
 .stats-cells-value {
-    padding-left: 10px;
+    padding: 10px;
     text-align: left;
-    width: 80px;
 }
 .stats-cells-bar {
     padding: 10px;
@@ -248,11 +240,8 @@ input[type="number"] {
 
 .no-underline-hyperlink {
     text-decoration: none;
-    color:inherit;
 }
-/* 
-.evolution-tree {
 
-}
-   */
+  
+  
   
