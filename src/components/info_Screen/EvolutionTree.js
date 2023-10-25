@@ -1,14 +1,14 @@
-import '../../css/style.css';
+import '../../css/style.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-
-function EvolutionTree(evolutionLine) {
-    console.log(evolutionLine)
+const EvolutionTree = ({evolutionData, onEvolutionSpriteClick}) => {
     return (
         <div>
             <h2 className='evolution-header'>Evolution Tree </h2>
             <div className='evolution-tree'>
-                {evolutionLine.evolutionData.length > 1 ? (
-                    evolutionLine.evolutionData.map((object, index) => (
+                {evolutionData.length > 1 ? (
+                    evolutionData.map((object, index) => (
                         <div key={object.name} className='evolution-item'>
                             {index > 0 &&  <span className='evolution-arrow'>&#8594;</span>}
                             {index > 0 && object.evolutionDetails && (
@@ -22,7 +22,9 @@ function EvolutionTree(evolutionLine) {
                                     )}
                                 </span>
                             )}
-                            <img src={object.sprite} alt={object.name} className='evolution-sprite'/>
+                            <Link onClick={() => onEvolutionSpriteClick(object.name)}>
+                                <img src={object.sprite} alt={object.name} className='evolution-sprite'/>
+                            </Link>
                         </div>
                     ))
                 ) : (
@@ -30,7 +32,7 @@ function EvolutionTree(evolutionLine) {
                 )}
             </div>
         </div>
-      );      
-  }
+      );
+}
 
 export default EvolutionTree

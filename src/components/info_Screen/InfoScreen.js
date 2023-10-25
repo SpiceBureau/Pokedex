@@ -44,6 +44,11 @@ const InfoScreen = () => {
     const handleNextLinkClick = () => { 
         navigate(`/infoScreen/${nextPokemonName.toLowerCase()}`)
     };
+    const handleEvolutionSpriteClick = (evolutionSpritePokemonName) => {
+        navigate(`/infoScreen/${evolutionSpritePokemonName.toLowerCase()}`)
+        console.log(evolutionSpritePokemonName)
+    };
+
     async function getSprite(name) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
         const data = await response.json();
@@ -122,6 +127,7 @@ const InfoScreen = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
+    console.log(evolutionData)
     return (
         <div className='page'>
             <h1 className='header'><Link className='no-underline-hyperlink' onClick={handleLinkClick}> Pokemon Info </Link></h1>
@@ -152,7 +158,7 @@ const InfoScreen = () => {
                 </div>
             </div>
             <div className='evolution-table'>
-                <EvolutionTree evolutionData={evolutionData}/>
+                <EvolutionTree evolutionData={evolutionData} onEvolutionSpriteClick={handleEvolutionSpriteClick}/>
             </div>
         </div>
     );

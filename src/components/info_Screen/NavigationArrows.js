@@ -2,7 +2,7 @@ import '../../css/style.css'
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function NavigationArrows({currentPokemonID, onPreviousLinkClick, onNextLinkClick, previousPokemonName, nextPokemonName}) {
+const NavigationArrows = ({currentPokemonID, onPreviousLinkClick, onNextLinkClick, previousPokemonName, nextPokemonName}) => {
     return (
         <div className="pokemon-navigation">
             {previousPokemonName && previousPokemonName !== "" && (
