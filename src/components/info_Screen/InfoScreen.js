@@ -46,7 +46,6 @@ const InfoScreen = () => {
     };
     const handleEvolutionSpriteClick = (evolutionSpritePokemonName) => {
         navigate(`/infoScreen/${evolutionSpritePokemonName.toLowerCase()}`)
-        console.log(evolutionSpritePokemonName)
     };
 
     async function getSprite(name) {
@@ -60,6 +59,7 @@ const InfoScreen = () => {
         const id = url.split("/").slice(-1)[0];
         const fetchPokemon = async () => {
             try {
+                
                 const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
                 const data = pokemonResponse.data;
 
@@ -127,7 +127,16 @@ const InfoScreen = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
-    console.log(evolutionData)
+    if (Object.keys(pokemon).length === 0) {
+        return (
+            <div id="error-page" className="centered">
+                <h1>Couldn't fetch data for this pokemon</h1>
+                <a href="https://pokemondb.net/pokedex/unown">
+                    <img src="https://img.pokemondb.net/sprites/home/normal/unown-qm.png" alt="Unown"></img>
+                </a>
+            </div>
+        )
+    }
     return (
         <div className='page'>
             <h1 className='header'><Link className='no-underline-hyperlink' onClick={handleLinkClick}> Pokemon Info </Link></h1>

@@ -1,5 +1,5 @@
 import '../../css/style.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const PokemonInfoTable = (pokemonData) => {
     const pokemon = pokemonData.pokemon.pokemon;
