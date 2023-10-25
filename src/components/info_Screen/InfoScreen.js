@@ -34,9 +34,11 @@ const InfoScreen = () => {
     function traverseEvolution(rawEvolutionData) {
         let evolutionLine = [{
             name: rawEvolutionData.species.name,
-            lvl: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].min_level : []
+            lvl: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].min_level : null,  
+            item: rawEvolutionData.evolution_details.length !== 0 ? rawEvolutionData.evolution_details[0].item : null  
         }];
 
+        //console.log(rawEvolutionData.evolution_details[0].item)
         if (rawEvolutionData.evolves_to) {
             for (const evolvedPokemon of rawEvolutionData.evolves_to) {
                 evolutionLine.push(...traverseEvolution(evolvedPokemon));
@@ -71,7 +73,8 @@ const InfoScreen = () => {
                     return {
                         name: element.name,
                         sprite: spriteResponse,
-                        lvl: element.lvl
+                        lvl: element.lvl,
+                        item: element.item
                     };
                 }));
                 
@@ -134,7 +137,7 @@ const InfoScreen = () => {
             />
             <div className='content'>
                 <div className='infoSprite'>
-                    <PokemonImage id={pokemon.id} sprite={pokemon.sprites.other.dream_world.front_default} />
+                    <PokemonImage id={pokemon.id} sprite={pokemon.sprites.other.dream_world.front_default ? pokemon.sprites.other.dream_world.front_default : pokemon.sprites.other['official-artwork'].front_default} />
                 </div>
                 <div className="info-table">
                     <PokemonInfoTable pokemon={

@@ -24,7 +24,7 @@ const BaseStatsTable = (stats) => {
     
   return (
     <>
-        <h2>Base stats</h2>
+        <h2>Base Stats</h2>
         <table className="stats-cells">
         <tbody>
             {baseStats.map((stat, index) => (

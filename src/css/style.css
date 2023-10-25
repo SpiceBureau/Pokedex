@@ -261,18 +261,25 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: center;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    font-size: 20px;
 }
 
 .evolution-tree { 
     display: flex
 }
 
+.evolution-header {
+    text-align: center;
+}
+
 .evolution-item {
     display: flex;
     text-align: center;
     flex-direction: row;
-    align-items: center
+    align-items: center;
+    font-size: 15px;
 }
 
 .evolution-arrow {
