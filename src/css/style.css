@@ -16,6 +16,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0;
+    margin-top: 0;
   }
   
   .header::before {
@@ -179,6 +181,8 @@ body {
   .sprite-img {
       align-items: center;
       justify-content: center;
+      max-width: 300px;
+      max-height: 300px;
   }
   .info-table {
       flex: 1;
@@ -262,7 +266,6 @@ body {
     justify-content: center; 
     align-items: center;
     padding-bottom: 30px;
-    padding-top: 10px;
     font-size: 20px;
 }
 
@@ -282,10 +285,11 @@ body {
     font-size: 15px;
 }
 
-.evolution-arrow {
-    display: inline-block;
-    text-align: center;
-    height: fit-content;
+.evolution-text {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 17px;
 }
 
 .evolution-sprite {
@@ -293,3 +297,10 @@ body {
     height: auto;
 }
 
+.evolution-arrow {
+    font-size: 35px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: fit-content;
+}
