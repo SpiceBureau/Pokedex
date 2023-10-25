@@ -162,7 +162,7 @@ body {
   .content {
       display: flex;
       flex: 1;
-      padding-left: 100px;
+      padding-left: 80px;
       padding-right: 100px;
   }
   
@@ -171,22 +171,25 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
+      padding-right: 10px;
+      width: 450px;
+      height: 450px;
   }
     
   .sprite-img {
-      max-width: 500px;
-      max-height: 500px;
+      align-items: center;
+      justify-content: center;
   }
   .info-table {
       flex: 1;
-      padding-left: 50px;
       font-size: 20px;
-      max-width: 400px;
+      width: 30px;
   }
   
   .infoTable-cells {
       border: 1px solid #000;
       background-color: whitesmoke;
+      min-width: 200px;
   }
   .infoTable-cells td {
       padding: 10px;
@@ -221,37 +224,65 @@ body {
       height: 15px;
       border-radius: 7px;
   }
-  .pokemon-navigation {
-      width: 100%; 
-  }
+.pokemon-navigation {
+    width: 100%; 
+    z-index: 1;
+}
   
-  .pokemon-navigation-previous,
-  .pokemon-navigation-next {
-      width: fit-content;
-      display: inline-block; 
-      text-align: center; 
-      box-sizing: border-box; 
-      font-size: 20px;
-  }
+.pokemon-navigation-previous,
+.pokemon-navigation-next {
+    width: fit-content;
+    display: inline-block; 
+    text-align: center; 
+    box-sizing: border-box; 
+    font-size: 20px;
+}
   
-  .pokemon-navigation-previous {
-      float: left; 
-      padding-left: 10px;
-      text-decoration: none;
-  }
+.pokemon-navigation-previous {
+    float: left; 
+    padding-left: 10px;
+    text-decoration: none;
+}
   
-  .pokemon-navigation-next {
-      float: right; 
-      padding-right: 10px;
-      text-decoration: none;
-  }
+.pokemon-navigation-next {
+    float: right; 
+    padding-right: 10px;
+    text-decoration: none;
+}
   
-  .no-underline-hyperlink {
-      text-decoration: none;
-      color:inherit;
-  }
-  /* 
-  .evolution-tree {
-  
-  }
-     */
+.no-underline-hyperlink {
+    text-decoration: none;
+    color:inherit;
+}
+
+.evolution-table {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.evolution-tree { 
+    display: flex
+}
+
+.evolution-item {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    align-items: center
+}
+
+.evolution-arrow {
+    display: inline-block;
+    text-align: center;
+    height: fit-content;
+}
+
+.evolution-sprite {
+    width: auto;
+    height: auto;
+}
+

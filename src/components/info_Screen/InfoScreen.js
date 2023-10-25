@@ -6,6 +6,7 @@ import PokemonInfoTable from './PokemonInfoTable'
 import BaseStatsTable from './BaseStatssTable';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import NavigationArrows from './NavigationArrows';
+import EvolutionTree from './EvolutionTree';
 
 const NUM_OF_POKEMON = 1010;
 
@@ -102,7 +103,6 @@ const InfoScreen = () => {
                     value: totalStatValue,
                 },
                 ];  
-                console.log(newEvolutionLine)
 
                 setPokemon(data);
                 setSpieces(englishGenus);
@@ -124,7 +124,7 @@ const InfoScreen = () => {
     }
     return (
         <div className='page'>
-            <Link onClick={handleLinkClick}><h1 className='header'>Pokémon Info</h1></Link>
+            <h1 className='header'><Link className='no-underline-hyperlink' onClick={handleLinkClick}> Pokemon Info </Link></h1>
             <NavigationArrows 
                 currentPokemonID={pokemon.id} 
                 onNextLinkClick={handleNextLinkClick} 
@@ -148,6 +148,9 @@ const InfoScreen = () => {
                 <div className='stats-table'>
                     <BaseStatsTable stats={stats}/>
                 </div>
+            </div>
+            <div className='evolution-table'>
+                <EvolutionTree evolutionData={evolutionData}/>
             </div>
         </div>
     );
