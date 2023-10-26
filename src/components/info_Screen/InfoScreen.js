@@ -37,7 +37,6 @@ const fetchEvolution = (url) => {
     return axios.get(url);
 }
 const fetchSprite = (name) => {
-    console.log(name)
     return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
 }
 const fetchPreviousPokemon = (id) => {
@@ -67,9 +66,11 @@ const InfoScreen = () => {
         navigate(`/infoScreen/${evolutionSpritePokemonName.toLowerCase()}`)
     };
 
-    const { data: pokemon, isLoading: isLoadingPokemon} = useQuery(['pokemon', name], () => fetchPokemon(id))
-    const { data: pokemonSpecies, isLoading: isLoadingSpecies} = useQuery(['pokemonSpecies', name], () => fetchSpecies(id))
-    const { data: pokemonEvolution, isLoading: isLoadingEvolution} = useQuery({
+    const { data: pokemon, isLoading: isLoadingPokemon, isError: isErrorPokemon} = useQuery(['pokemon', name], () => fetchPokemon(id))
+    const { data: pokemonSpecies, isLoading: isLoadingSpecies, isError: isErrorSpecies} = useQuery(['pokemonSpecies', name], () => fetchSpecies(id))
+    
+    
+    const { data: pokemonEvolution, isLoading: isLoadingEvolution, isError: isErrorEvolution} = useQuery({
         queryKey: ['pokemonEvolution', name],
         queryFn: () => fetchEvolution(pokemonSpecies.data.evolution_chain.url),
         enabled: !!pokemonSpecies,
@@ -99,9 +100,20 @@ const InfoScreen = () => {
         queryFn: () => fetchNextPokemon(pokemonId),
         enabled: !!pokemonId && pokemonId !== NUM_OF_POKEMON,
     })
- 
+    
+    if (isErrorPokemon || isErrorEvolution || isErrorSpecies ) {
+        return <div id="error-page" className="centered">
+                    <h1>Couldn't fetch data for this pokemon</h1>
+                    <a href="https://pokemondb.net/pokedex/unown">
+                        <img src="https://img.pokemondb.net/sprites/home/normal/unown-qm.png" alt="Unown"></img>
+                    </a>
+                </div> 
+    }
+
     if (isLoadingPokemon || isLoadingEvolution || isLoadingSpecies || isLoadingNext || isLoadingPrevious || sprites[0].isLoading ) {
-        return <div>Loading...</div>;
+        return <div id="loading-page" className="centered">
+                    <h1>Loading...</h1>
+                </div> ;   
     }
 
     const englishGenus = pokemonSpecies?.data.genera.find((genus) => genus.language.name === 'en').genus;
@@ -120,7 +132,6 @@ const InfoScreen = () => {
     
     for (let i = 0; i < sprites.length; i++) {
         if (sprites[i] && sprites[i].data) {
-            console.log(sprites[i]);
             evolutionLine[i].sprite = sprites[i].data.data.sprites.front_default;
         }
     }

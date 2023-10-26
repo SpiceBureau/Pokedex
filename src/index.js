@@ -10,6 +10,7 @@ import {
 import MainScreen from './components/main_Screen/MainScreen';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools'
+import AboutScreen from './components/about_screen/AboutScreen';
 
 const queryClient = new QueryClient()
 
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
                 <InfoScreen />
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
-  }
+  },
+  {
+    path: "/about",
+    element: <AboutScreen />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
