@@ -37,6 +37,7 @@ const fetchEvolution = (url) => {
     return axios.get(url);
 }
 const fetchSprite = (name) => {
+    console.log(name)
     return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
 }
 const fetchPreviousPokemon = (id) => {
@@ -77,14 +78,15 @@ const InfoScreen = () => {
     const evoChain = pokemonEvolution?.data.chain;
     evolutionLine = traverseEvolution(evoChain)
 
-    const sprites = useQueries(
-            evolutionLine.map( (element) => ({
-                queryKey: ["sprites", name],
+    const sprites = useQueries( 
+            evolutionLine.map( (element, index) => ({
+                queryKey: ["sprites", index],
                 queryFn: () => fetchSprite(element.name),
                 enabled: !!evoChain
             })
         )
     )
+
     
     const pokemonId = pokemon?.data.id;
     const { data: previousPokemon, isLoading: isLoadingPrevious} = useQuery({
@@ -115,9 +117,12 @@ const InfoScreen = () => {
             value: totalStatValue,
         },
     ];  
-
-    for (let i = 0; i < evolutionLine.length; i++) {
-        evolutionLine[i].sprite = sprites[i].data.data.sprites.front_default;
+    
+    for (let i = 0; i < sprites.length; i++) {
+        if (sprites[i] && sprites[i].data) {
+            console.log(sprites[i]);
+            evolutionLine[i].sprite = sprites[i].data.data.sprites.front_default;
+        }
     }
     
     return (
