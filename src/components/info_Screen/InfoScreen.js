@@ -68,8 +68,6 @@ const InfoScreen = () => {
 
     const { data: pokemon, isLoading: isLoadingPokemon, isError: isErrorPokemon} = useQuery(['pokemon', name], () => fetchPokemon(id))
     const { data: pokemonSpecies, isLoading: isLoadingSpecies, isError: isErrorSpecies} = useQuery(['pokemonSpecies', name], () => fetchSpecies(id))
-    
-    
     const { data: pokemonEvolution, isLoading: isLoadingEvolution, isError: isErrorEvolution} = useQuery({
         queryKey: ['pokemonEvolution', name],
         queryFn: () => fetchEvolution(pokemonSpecies.data.evolution_chain.url),
@@ -90,18 +88,18 @@ const InfoScreen = () => {
 
     
     const pokemonId = pokemon?.data.id;
-    const { data: previousPokemon, isLoading: isLoadingPrevious} = useQuery({
+    const { data: previousPokemon, isLoading: isLoadingPrevious, isError: isErrorPrevious} = useQuery({
         queryKey: ['previousPokemon', name],
         queryFn: () => fetchPreviousPokemon(pokemonId),
         enabled: !!pokemonId && pokemonId !== 1,
     })
-    const { data: nextPokemon, isLoading: isLoadingNext} = useQuery({
+    const { data: nextPokemon, isLoading: isLoadingNext, isError: isErrorNext} = useQuery({
         queryKey: ['nextPokemon', name],
         queryFn: () => fetchNextPokemon(pokemonId),
         enabled: !!pokemonId && pokemonId !== NUM_OF_POKEMON,
     })
     
-    if (isErrorPokemon || isErrorEvolution || isErrorSpecies ) {
+    if (isErrorPokemon || isErrorEvolution || isErrorSpecies || isErrorPrevious || isErrorNext) {
         return <div id="error-page" className="centered">
                     <h1>Couldn't fetch data for this pokemon</h1>
                     <a href="https://pokemondb.net/pokedex/unown">

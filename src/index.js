@@ -24,7 +24,6 @@ const router = createBrowserRouter([
     path: "/infoScreen/:name",
     element: <QueryClientProvider client={queryClient}>
                 <InfoScreen />
-                <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
   },
   {
