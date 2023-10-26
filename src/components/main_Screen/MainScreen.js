@@ -46,7 +46,7 @@ const MainScreen = () => {
 
     return (
         <div>
-            <h1 className='header'>Pokedex</h1>
+            <h1 className='header'>Pokédex</h1>
             <div>
                 <FilterRow onGenChange={handleGenChange} onTypeChange={handleTypeChange} onSpriteChange={handleSpritesChange} />
             </div>

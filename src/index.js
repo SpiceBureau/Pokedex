@@ -8,7 +8,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import MainScreen from './components/main_Screen/MainScreen';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools'
 
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -18,7 +21,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/infoScreen/:name",
-    element: <InfoScreen />
+    element: <QueryClientProvider client={queryClient}>
+                <InfoScreen />
+                <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
   }
 ]);
 
