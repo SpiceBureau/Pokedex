@@ -18,7 +18,9 @@ const EvolutionTree = ({evolutionData, onEvolutionSpriteClick, pokemonName}) => 
                                             object.evolutionDetails.item !== null ?
                                                 `(Use ${object.evolutionDetails.item.name})  ` : 
                                                     object.evolutionDetails.min_happiness !== null 
-                                                        ? `(High Friendship)  ` : ""
+                                                        ? `(High Friendship)  ` : 
+                                                            object.evolutionDetails.trigger.name == "trade" 
+                                                                ? '(Trade)' : ""
                                     )}
                                 </span>
                             )}
