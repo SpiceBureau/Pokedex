@@ -3,8 +3,8 @@
 Contains all Pokémon from Gen I to Gen IX. Filter Pokémon based on their Gen or Type.
 Click on the Pokémon card to see more details about each pokemon
 
-<img loading="lazy" width="600px" src="./public/mainpage.PNG" alt="mainmenu" />
-<img loading="lazy" width="600px" src="./public/infopage.PNG" alt="infopage" />
+<img loading="lazy" width="900px" src="./public/mainpage.PNG" alt="mainmenu" />
+<img loading="lazy" width="900px" src="./public/infopage.PNG" alt="infopage" />
 
 ## Run Locally
 
