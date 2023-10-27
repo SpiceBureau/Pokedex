@@ -1,1 +1,1 @@
-![Main Page](https://github.com/SpiceBureau/b2match/public/mainpage.png)
+<img loading="lazy" width="30px" src="./public/mainpage.PNG" alt="image_name png" />
