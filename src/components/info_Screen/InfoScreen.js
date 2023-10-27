@@ -40,10 +40,16 @@ const fetchSprite = (name) => {
     return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
 }
 const fetchPreviousPokemon = (id) => {
-    return axios.get((`https://pokeapi.co/api/v2/pokemon/${id - 1}`))
+    if (id !== 1) {
+        return axios.get((`https://pokeapi.co/api/v2/pokemon/${id - 1}`))
+    }
+    return axios.get((`https://pokeapi.co/api/v2/pokemon/${id}`))
 }
 const fetchNextPokemon = (id) => {
-    return axios.get((`https://pokeapi.co/api/v2/pokemon/${id + 1}`))
+    if (id !== NUM_OF_POKEMON) {
+        return axios.get((`https://pokeapi.co/api/v2/pokemon/${id + 1}`))
+    }
+    return axios.get((`https://pokeapi.co/api/v2/pokemon/${id}`))
 }
 
 const InfoScreen = () => {
@@ -91,12 +97,12 @@ const InfoScreen = () => {
     const { data: previousPokemon, isLoading: isLoadingPrevious, isError: isErrorPrevious} = useQuery({
         queryKey: ['previousPokemon', name],
         queryFn: () => fetchPreviousPokemon(pokemonId),
-        enabled: !!pokemonId && pokemonId !== 1,
+        enabled: !!pokemonId,
     })
     const { data: nextPokemon, isLoading: isLoadingNext, isError: isErrorNext} = useQuery({
         queryKey: ['nextPokemon', name],
         queryFn: () => fetchNextPokemon(pokemonId),
-        enabled: !!pokemonId && pokemonId !== NUM_OF_POKEMON,
+        enabled: !!pokemonId,
     })
     
     if (isErrorPokemon || isErrorEvolution || isErrorSpecies || isErrorPrevious || isErrorNext) {
@@ -133,7 +139,6 @@ const InfoScreen = () => {
             evolutionLine[i].sprite = sprites[i].data.data.sprites.front_default;
         }
     }
-    
     return (
             <div className='page'>
                 <h1 className='header'><Link className='no-underline-hyperlink' onClick={handleLinkClick}> Pokémon Info </Link></h1>
@@ -141,8 +146,8 @@ const InfoScreen = () => {
                     currentPokemonID={pokemon.data.id} 
                     onNextLinkClick={handleNextLinkClick} 
                     onPreviousLinkClick={handlePreviousLinkClick} 
-                    previousPokemonName={previousPokemon.data.name}
-                    nextPokemonName={nextPokemon.data.name}
+                    previousPokemonName={previousPokemon.data}
+                    nextPokemonName={nextPokemon.data}
                 />
                 <div className='content'>
                     <div className='infoSprite'>
