@@ -17,7 +17,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd b3match
+  cd b2match
 ```
 
 Install dependencies
