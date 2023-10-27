@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 import MainScreen from './components/main_Screen/MainScreen';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools'
 import AboutScreen from './components/about_screen/AboutScreen';
 
 const queryClient = new QueryClient()
